@@ -2,8 +2,10 @@
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-   // Here is the HTML formatting for our mission target div.
-   /*
+   let div = document.getElementById("missionTarget");
+   div.innerHTML =
+    // Here is the HTML formatting for our mission target div.
+   
                 `<h2>Mission Destination</h2>
                 <ol>
                     <li>Name: ${name} </li>
@@ -12,8 +14,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                     <li>Distance from Earth: ${distance}</li>
                     <li>Number of Moons: ${moons}</li>
                 </ol>
-                <img src="${iamgeUrl}">`
-   */
+                <img src="${imageUrl}">`
+   
 }
 
 function validateInput(testInput) {
@@ -41,36 +43,39 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
    else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
     alert("Enter Correct Information for each Field. Letters only for pilot and copilot. Numbers only for fuel level and cargo mass.");
    } else {
+    list.style.visibility = 'visible';
     pilotStatus.innerHTML= `Pilot ${pilot} is ready for Launch.`
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for Launch.`
     let launchStatus = document.getElementById("launchStatus");
-    //not enough fuel and cargo is too heavy
-    if (fuelLevel < 10000 && cargoLevel > 10000) {
+    //not enough fuel 
+    if (fuelLevel < 10000) {
         list.style.visibility = "visible";
-        fuelStatus.innerHTML = "Not enough fuel for Launch.";
+        fuelStatus.innerHTML = "Not enough fuel for launch.";
         cargoStatus.innerHTML = "Cargo mass too heavy for Launch.";
         launchStatus.innerHTML = "Shuttle not ready for launch";
         launchStatus.style.color = "red";
     }
-    //enough fuel and cargo is too heavy
-    else if (cargoLevel > 10000 && fuelLevel > 10000) {
+    //cargo is too heavy
+    else if (cargoLevel > 10000) {
         list.style.visibility = "visible";
         cargoStatus.innerHTML = "Cargo mass too heavy for Launch.";
         fuelLevel.innerHTML = "Fuel level sufficient for Launch."
         launchStatus.innerHTML = "Shuttle not ready for Launch";
         launchStatus.style.color = "red";
-    //not enough fuel and cargo is the right weigh
-    } else if (cargoLevel < 10000 && fuelLevel > 10000) {
+
+    //not enough fuel and cargo is too heavy
+    } else if (cargoLevel > 10000 && fuelLevel < 10000) {
           list.style.visibility = "visible";
-          cargoStatus.innerHTML = "Cargo is light enough for Launch."
+          cargoStatus.innerHTML = "Cargo mass too heavy for Launch."
           fuelLevel.innerHTML = "Not enough fuel for Launch.";
           launchStatus.innerHTML = "Shuttle not ready for Launch";
           launchStatus.style.color = "red";
-    } else {
+    //enough fuel and cargo light enough
+    } else if (cargoLevel <= 10000 && fuelLevel >= 10000){
        fuel.innerHTML = "Fuel level sufficient for Launch";
        cargo.innerHTML = "Cargo mass clear for launch."; 
        launchStatus.innerHTML = "Shuttle is ready for Launch.";
-       launchStatus.color = "green";
+       launchStatus.style.color = "green";
     }
   }  
 }
