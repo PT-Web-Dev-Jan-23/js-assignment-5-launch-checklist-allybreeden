@@ -44,8 +44,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     alert("Make sure to enter valid information for each field! Letters for pilot and copilot. Numbers for fuel level and cargo mass.");
    } else {
     list.style.visibility = 'visible';
-    pilotStatus.innerHTML= `Pilot ${pilot} is ready for Launch`
-    copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for Launch`
+    pilotStatus.innerHTML= `Pilot ${pilot} is ready for launch`
+    copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`
     let launchStatus = document.getElementById("launchStatus");
     //not enough fuel 
     if (fuelLevel < 10000) {
@@ -75,7 +75,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
        fuel.innerHTML = "Fuel level high enough for launch";
        cargo.innerHTML = "Cargo mass low enough for launch"; 
        launchStatus.innerHTML = "Shuttle is Ready for Launch";
-       launchStatus.style.color = "grgb(65, 159, 106)";
+       launchStatus.style.color = "green";
     }
   }  
 }
