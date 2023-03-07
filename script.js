@@ -1,11 +1,5 @@
 // Write your JavaScript code here!
 
-// const { pickPlanet } = require("./scriptHelper");
-
-// const { addDestinationInfo } = require("./scriptHelper");
-
-// const { formSubmission } = require("./scriptHelper");
-
 window.addEventListener("load", function() {
 
    let listedPlanets;
